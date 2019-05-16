@@ -64,6 +64,14 @@ class Index extends Component {
       complete: () => { }
     });
   }
+  //这个分享的函数必须写在入口中，写在子组件中不生效
+  onShareAppMessage(e) {
+    return {
+        title: 'Taro小程序实践',
+        path: `/pages/index/index`,
+        // imageUrl: '自定义转发的图片',
+    }
+  }
   render() {
     let { swiperList } = this.state;
     return (
