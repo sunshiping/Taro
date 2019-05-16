@@ -1,0 +1,76 @@
+.main .search-box {
+  margin-bottom: 8px;
+}
+.main .swiper-item_img {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.main .module-box {
+  padding: 20px 0 0 0;
+}
+.main .module-box_con {
+  -webkit-flex: 0 0 44.6666666667%;
+  -ms-flex: 0 0 44.6666666667%;
+  flex: 0 0 44.6666666667%;
+  -webkit-box-flex: 0;
+  max-width: 44.6666666667%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 12px #cccaca;
+}
+.main .module-box_con .left .title {
+  margin-bottom: 8px;
+  font-size: 32px;
+  color: #333;
+}
+.main .module-box_con .left .desc {
+  font-size: 24px;
+  color: #aaa6a6;
+}
+.main .module-box_con .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.main .module-box_con .right .icon {
+  width: 46px;
+  height: 46px;
+}
+.main .recommend-list {
+  padding: 0 20px;
+  font-size: 0;
+}
+.main .recommend-list .recommend-list_title {
+  margin-bottom: 12px;
+  font-size: 32px;
+  color: #333;
+  font-weight: bold;
+}
+.main .recommend-list .course-box {
+  padding: 10px;
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+.main .recommend-list .course-box .course-img {
+  width: 100%;
+  height: 130px;
+  border-radius: 6px;
+}
+.main .recommend-list .course-box .text {
+  padding: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 24px;
+  color: #9e9898;
+}
+.main .support-box {
+  padding: 0 30px;
+}

@@ -1,0 +1,19 @@
+.topiclist-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.topiclist-menu .img {
+  width: 56px;
+  height: 56px;
+}
+.topiclist-menu .title {
+  font-size: 36px;
+}
+.topiclist-menu .img:nth-child(1) {
+  margin-left: 20px;
+}
+.topiclist-menu .img:nth-child(3) {
+  margin-right: 10px;
+}
