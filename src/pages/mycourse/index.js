@@ -8,7 +8,7 @@ import './index.less'
 class Course extends Component {
 
   config = {
-    navigationBarTitleText: '约课列表'
+    navigationBarTitleText: '我的预约'
   }
 
   componentWillReceiveProps(nextProps) {

@@ -22,8 +22,11 @@ class App extends Component {
     pages: [
       'pages/index/index',
       'pages/course/index',
+      'pages/mycourse/index',
       'pages/list/index',
       'pages/my/index',
+      'pages/admin/index',
+      'pages/setting/index',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -44,7 +47,7 @@ class App extends Component {
         selectedIconPath: "./assets/img/tab/icon-Message_HL.png"
       },{
         pagePath: "pages/my/index",
-        text: "我的",
+        text: "个人中心",
         iconPath: "./assets/img/tab/icon-Mine.png",
         selectedIconPath: "./assets/img/tab/icon-Mine_HL.png"
       }],

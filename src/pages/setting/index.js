@@ -1,14 +1,14 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-// import { getTopicList } from '../../utils/request'
+import { View, Button, Text, Image } from '@tarojs/components'
+import { connect } from '@tarojs/redux';
+import { AtList, AtListItem } from "taro-ui";
 
 import './index.less'
 
-class Course extends Component {
+class Setting extends Component {
 
   config = {
-    navigationBarTitleText: '约课列表'
+    navigationBarTitleText: '个人设置'
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,14 +24,13 @@ class Course extends Component {
   componentDidShow() { }
 
   componentDidHide() { }
-
   render() {
     return (
-      <View className='index'>
-        <Text>约课</Text>
+      <View className="setting">
+        设置中心
       </View>
     )
   }
 }
 
-export default Course
+export default Setting

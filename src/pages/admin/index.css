@@ -1,0 +1,44 @@
+page {
+  height: 100%;
+}
+.admin .my-box {
+  height: 100%;
+  margin-top: 2px;
+  background-color: #eee8e8;
+}
+.admin .my-box .personal {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #eee8e8;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.admin .my-box .personal .avatar-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  margin-right: 30px;
+}
+.admin .my-box .personal .personal-con {
+  flex: 2;
+}
+.admin .my-box .personal .personal-con .name {
+  margin-bottom: 12px;
+  font-size: 32px;
+  color: #333;
+}
+.admin .my-box .personal .personal-con .tel {
+  font-size: 28px;
+  color: #a7a1a1;
+}
+.admin .my-box .personal .personal-con .remark {
+  font-size: 24px;
+  color: #a7a1a1;
+}
+.admin .admin-type {
+  background-color: #fff;
+}

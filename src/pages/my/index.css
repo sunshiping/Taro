@@ -1,0 +1,42 @@
+page {
+  height: 100%;
+}
+.my-box {
+  height: 100%;
+  margin-top: 2px;
+  background-color: #eee8e8;
+}
+.my-box .personal {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #eee8e8;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.my-box .personal .avatar-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  margin-right: 30px;
+}
+.my-box .personal .personal-con {
+  flex: 2;
+}
+.my-box .personal .personal-con .name {
+  margin-bottom: 12px;
+  font-size: 32px;
+  color: #333;
+}
+.my-box .personal .personal-con .tel {
+  font-size: 28px;
+  color: #a7a1a1;
+}
+.my-box .personal .btn-bd {
+  font-size: 28px;
+  border: 1px solid #11bd2e;
+  color: #11bd2e;
+}
