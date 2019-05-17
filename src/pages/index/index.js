@@ -3,6 +3,8 @@ import { View, Button, Image, Text, Swiper, SwiperItem } from '@tarojs/component
 import { connect } from '@tarojs/redux'
 import Menu from '../../components/menu/menu'
 import { AtNoticebar, AtSearchBar, AtDivider } from 'taro-ui'
+import throttle from '../../utils/throttle';
+
 // import { getTopicList } from '../../utils/request'
 import swiper1 from '../../assets/img/swiper/1.jpg'
 import swiper2 from '../../assets/img/swiper/2.jpg'
@@ -18,15 +20,49 @@ class Index extends Component {
   config = {
     navigationBarTitleText: '首页'
   }
-  state = {
-    searchValue: '',
-    swiperList: [
-      swiper1,
-      swiper2,
-      swiper3,
-      swiper4,
-      swiper5,
-    ]
+
+  constructor() {
+    super(...arguments)
+    this.state = {
+      searchValue: '',
+      isFixed: false,
+      swiperList: [
+        swiper1,
+        swiper2,
+        swiper3,
+        swiper4,
+        swiper5,
+      ]
+    }
+    this.pageScrollFn = throttle(this.scrollFn, 200, this)
+  }
+  scrollFn = (scrollTop) => {
+    // do something
+    let menuTop = 27;  //当距离不确定时,可以用createSelectorQuery来测量
+    if (scrollTop > menuTop) {
+      this.setState({
+        isFixed: true
+      })
+    } else {
+      this.setState({
+        isFixed: false
+      })
+    }
+  }
+
+  // 在H5或者其它端中，这个函数会被忽略
+  onPageScroll(e) {
+    this.pageScrollFn(e.scrollTop)
+  }
+
+  componentDidMount() {
+    // 只有编译为h5时下面代码才会被编译
+    if (process.env.TARO_ENV === 'h5') {
+      window.addEventListener('scroll', this.pageScrollFn)
+    }
+    // getTopicList().then(data => {
+    //   console.log('取到的数据', data)
+    // })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,11 +70,7 @@ class Index extends Component {
   }
 
   componentWillUnmount() { }
-  componentDidMount() {
-    // getTopicList().then(data => {
-    //   console.log('取到的数据', data)
-    // })
-  }
+
   componentDidShow() { }
 
   componentDidHide() { }
@@ -67,17 +99,18 @@ class Index extends Component {
   //这个分享的函数必须写在入口中，写在子组件中不生效
   onShareAppMessage(e) {
     return {
-        title: 'Taro小程序实践',
-        path: `/pages/index/index`,
-        // imageUrl: '自定义转发的图片',
+      title: 'Taro小程序实践',
+      path: `/pages/index/index`,
+      // imageUrl: '自定义转发的图片',
     }
   }
+
   render() {
-    let { swiperList } = this.state;
+    let { swiperList,isFixed } = this.state;
     return (
       <View className='main'>
         <AtNoticebar marquee={false} icon='volume-plus' close={false}>上课时间前1个小时，停止约课。</AtNoticebar>
-        <View className="search-box">
+        <View className={"search-box "+(isFixed?"search-fixed":"")}>
           <AtSearchBar
             value={this.state.searchValue}
             onChange={this.onChange.bind(this)}

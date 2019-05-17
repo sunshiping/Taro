@@ -1,6 +1,17 @@
 .main .search-box {
   margin-bottom: 8px;
 }
+.main .search-fixed {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: sticky;
+  top: -4px;
+  width: 100%;
+  z-index: 99;
+  background-color: #fff;
+  box-shadow: 0 4px 10px 0 rgba(232, 232, 232, 0.6);
+}
 .main .swiper-item_img {
   width: 100%;
   height: 100%;

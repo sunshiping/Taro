@@ -1,21 +1,36 @@
-.main{
-  .search-box{
+.main {
+  .search-box {
     margin-bottom: 8px;
   }
-  .swiper-item_img{
+
+  .search-fixed {
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: sticky;
+    top: -4px;
+    width: 100%;
+    z-index: 99;
+    background-color: #fff;
+    box-shadow: 0 4px 10px 0 rgba(232, 232, 232, 0.60);
+  }
+
+  .swiper-item_img {
     width: 100%;
     height: 100%;
-    box-sizing:border-box;
+    box-sizing: border-box;
   }
-  .module-box{
+
+  .module-box {
     padding: 20px 0 0 0;
   }
-  .module-box_con{
-    -webkit-flex:0 0 44.6666666667%;
-    -ms-flex:0 0 44.6666666667%;
-    flex:0 0 44.6666666667%;
-    -webkit-box-flex:0;
-    max-width:44.6666666667%;
+
+  .module-box_con {
+    -webkit-flex: 0 0 44.6666666667%;
+    -ms-flex: 0 0 44.6666666667%;
+    flex: 0 0 44.6666666667%;
+    -webkit-box-flex: 0;
+    max-width: 44.6666666667%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -24,48 +39,57 @@
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 12px rgb(204, 202, 202);
-    .left{
-      .title{
+
+    .left {
+      .title {
         margin-bottom: 8px;
         font-size: 32px;
         color: #333;
       }
-      .desc{
+
+      .desc {
         font-size: 24px;
         color: rgb(170, 166, 166);
       }
     }
-    .right{
+
+    .right {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      .icon{
-        width:46px;
+
+      .icon {
+        width: 46px;
         height: 46px;
       }
     }
   }
-  .recommend-list{
-    padding:0 20px;
-    font-size:0;
-    .recommend-list_title{
+
+  .recommend-list {
+    padding: 0 20px;
+    font-size: 0;
+
+    .recommend-list_title {
       margin-bottom: 12px;
       font-size: 32px;
       color: #333;
       font-weight: bold;
     }
-    .course-box{
-      padding:10px;
-      text-align:center;
+
+    .course-box {
+      padding: 10px;
+      text-align: center;
       font-size: 32px;
       margin-bottom: 10px;
-      .course-img{
+
+      .course-img {
         width: 100%;
         height: 130px;
         border-radius: 6px;
       }
-      .text{
-        padding:8px;
+
+      .text {
+        padding: 8px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -74,7 +98,8 @@
       }
     }
   }
-  .support-box{
+
+  .support-box {
     padding: 0 30px;
   }
 }
