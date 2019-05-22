@@ -1,0 +1,82 @@
+.course-time{
+  padding: 30px;
+  .course-time_box{
+    border-radius: 10px;
+    padding: 26px 0;
+    box-shadow: 0 0 18px #dddcdc;
+    box-sizing: border-box;
+    .at-col{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .week{
+      margin-bottom: 12px;
+      font-size: 28px;
+      color: #e1e1e1;
+    }
+    .date{
+      width: 76px;
+      height: 76px;
+      line-height: 76px;
+      text-align: center;
+      font-size: 28px;
+      color: #333;
+      font-weight: bold
+    }
+    .active{
+      border-radius: 100%;
+      color: #fff;
+      background-color: rgb(255, 153, 0);
+    }
+  }
+}
+.course-list{
+  padding: 30px 30px 0;
+  .test-h{
+    height: 740px;
+  }
+  .no-data{
+    font-size: 28px;
+    color: #b8b2b2;
+    text-align: center;
+    line-height: 80px;
+  }
+  .swiper-item{
+    overflow-y: auto;
+  }
+  .course-list_con{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 24px;
+    color: #b8b2b2;
+  }
+  .time,.name{
+    font-size: 28px;
+    color: #333;
+  }
+  .left{
+    flex: 3;
+  }
+  .right-btn{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    align-items: flex-start;
+    .btn{
+      padding: 0 40px;
+      line-height: 50px;
+      font-size: 28px;
+      border: 1px solid rgb(5, 141, 5);
+      color: rgb(5, 141, 5);
+      background-color: #fff;
+    }
+    .btn:after{
+      border: none;
+    }
+  }
+}

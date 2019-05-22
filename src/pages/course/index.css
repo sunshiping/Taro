@@ -1,0 +1,83 @@
+.course-time {
+  padding: 30px;
+}
+.course-time .course-time_box {
+  border-radius: 10px;
+  padding: 26px 0;
+  box-shadow: 0 0 18px #dddcdc;
+  box-sizing: border-box;
+}
+.course-time .course-time_box .at-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.course-time .course-time_box .week {
+  margin-bottom: 12px;
+  font-size: 28px;
+  color: #e1e1e1;
+}
+.course-time .course-time_box .date {
+  width: 76px;
+  height: 76px;
+  line-height: 76px;
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+}
+.course-time .course-time_box .active {
+  border-radius: 100%;
+  color: #fff;
+  background-color: #ff9900;
+}
+.course-list {
+  padding: 30px 30px 0;
+}
+.course-list .test-h {
+  height: 740px;
+}
+.course-list .no-data {
+  font-size: 28px;
+  color: #b8b2b2;
+  text-align: center;
+  line-height: 80px;
+}
+.course-list .swiper-item {
+  overflow-y: auto;
+}
+.course-list .course-list_con {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 24px;
+  color: #b8b2b2;
+}
+.course-list .time,
+.course-list .name {
+  font-size: 28px;
+  color: #333;
+}
+.course-list .left {
+  flex: 3;
+}
+.course-list .right-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.course-list .right-btn .btn {
+  padding: 0 40px;
+  line-height: 50px;
+  font-size: 28px;
+  border: 1px solid #058d05;
+  color: #058d05;
+  background-color: #fff;
+}
+.course-list .right-btn .btn:after {
+  border: none;
+}

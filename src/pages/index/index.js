@@ -1,8 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Image, Text, Swiper, SwiperItem } from '@tarojs/components'
+import { AtSearchBar, AtDivider } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import Menu from '../../components/menu/menu'
-import { AtNoticebar, AtSearchBar, AtDivider } from 'taro-ui'
 import throttle from '../../utils/throttle';
 
 // import { getTopicList } from '../../utils/request'
@@ -109,7 +109,6 @@ class Index extends Component {
     let { swiperList,isFixed } = this.state;
     return (
       <View className='main'>
-        <AtNoticebar marquee={false} icon='volume-plus' close={false}>上课时间前1个小时，停止约课。</AtNoticebar>
         <View className={"search-box "+(isFixed?"search-fixed":"")}>
           <AtSearchBar
             value={this.state.searchValue}

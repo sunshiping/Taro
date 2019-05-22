@@ -47,7 +47,7 @@ class App extends Component {
         selectedIconPath: "./assets/img/tab/icon-Message_HL.png"
       },{
         pagePath: "pages/my/index",
-        text: "个人中心",
+        text: "我的",
         iconPath: "./assets/img/tab/icon-Mine.png",
         selectedIconPath: "./assets/img/tab/icon-Mine_HL.png"
       }],
@@ -58,7 +58,16 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    Taro.getSystemInfo({
+      success: res => {
+        console.log(res);
+        Taro.setStorageSync('phone',res)
+      }
+    }).then(res =>{
+
+    })
+  }
 
   componentDidShow () {}
 
