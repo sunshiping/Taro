@@ -33,7 +33,7 @@
   background-color: #ff9900;
 }
 .course-list {
-  padding: 30px 30px 0;
+  padding: 30px 0 0;
 }
 .course-list .test-h {
   height: 740px;
@@ -46,8 +46,11 @@
 }
 .course-list .swiper-item {
   overflow-y: auto;
+  width: 100%!important;
 }
 .course-list .course-list_con {
+  padding-left: 30px;
+  padding-right: 30px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;

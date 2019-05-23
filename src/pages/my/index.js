@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux';
-import { AtList, AtListItem } from "taro-ui";
+import { AtList, AtListItem,AtAvatar } from "taro-ui";
 
 import './index.less'
 
@@ -48,6 +48,7 @@ class My extends Component {
     return (
       <View className="my-box">
         <View className="personal">
+          {/* <AtAvatar circle size="large" image='https://jdc.jd.com/img/200'></AtAvatar> */}
           <Image className="avatar-icon" src={require('../../assets/img/swiper/3.jpg')}></Image>
           <View className="personal-con">
             <View className="name">钢铁侠</View>

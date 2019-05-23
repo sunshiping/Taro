@@ -36,6 +36,7 @@ page {
   color: #a7a1a1;
 }
 .my-box .personal .btn-bd {
+  width: 180px;
   font-size: 28px;
   border: 1px solid #11bd2e;
   color: #11bd2e;
