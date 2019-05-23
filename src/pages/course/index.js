@@ -207,9 +207,9 @@ class Course extends Component {
       .boundingClientRect();
     query.exec(res => {
       let heightAll = 0;
-      res[0].map((item,index)=>{
+      res[0].map((item, index) => {
         console.log(item.height);
-        heightAll+=item.height
+        heightAll += item.height
       })
       let windowHeight = phone.windowHeight - heightAll - 20
       console.log(windowHeight);
@@ -233,6 +233,34 @@ class Course extends Component {
     this.setState({
       selectIndex: e.detail.current
     })
+  }
+  appointment(item, e) {
+    console.log(item);
+    Taro.showModal({
+      title: '确定要预约？',
+      content: item.name + '-' + item.dance_name + '-' + item.crowd,
+    })
+      .then(res => {
+        if (res.confirm) {
+          // TODO 确定预约接口
+          Taro.showLoading({
+            mask:true,
+            title: '预约中...'
+          })
+          setTimeout(() => {
+            Taro.showToast({
+              title: '预约成功',
+              mask:true,
+              icon: 'success',
+              duration: 2000
+            })
+              .then(res => {
+                console.log(res)
+                Taro.hideLoading
+              })
+          }, 2000);
+        }
+      })
   }
   render() {
     let { daysList, selectIndex, windowHeight } = this.state;
@@ -280,7 +308,7 @@ class Course extends Component {
                                 <View className="crowd">适合: {item2.crowd}</View>
                               </View>
                               <View className="right-btn">
-                                <Button className="btn">预约</Button>
+                                <Button className="btn" onClick={this.appointment.bind(this, item2)}>预约</Button>
                               </View>
                             </View>
                           )
