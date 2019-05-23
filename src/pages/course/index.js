@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Swiper, SwiperItem, Button, Text } from '@tarojs/components'
-import { AtTabs, AtTabsPane, AtNoticebar, AtIcon } from 'taro-ui'
+import { View, Swiper, Image, SwiperItem, Button, Text } from '@tarojs/components'
+import { AtTabs, AtTabsPane, AtNoticebar, AtIcon, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 // import { getTopicList } from '../../utils/request'
 
@@ -9,11 +9,14 @@ import './index.less'
 class Course extends Component {
 
   config = {
-    navigationBarTitleText: '约课列表'
+    navigationBarTitleText: '约课列表',
+    enablePullDownRefresh: false,
+    onReachBottomDistance: 50
   }
   state = {
     windowHeight: 'height:750px;',
     selectIndex: 0,
+    isOpened: false,
     daysList: [
       {
         week: '三',
@@ -202,6 +205,7 @@ class Course extends Component {
   componentWillUnmount() { }
   componentDidMount() {
     const phone = Taro.getStorageSync('phone');
+
     const query = Taro.createSelectorQuery()
       .selectAll('.index >>> .notice, .index > .course-time')
       .boundingClientRect();
@@ -219,6 +223,12 @@ class Course extends Component {
     });
   }
   componentDidShow() {
+    const user = Taro.getStorageSync('user');
+    if (!user) {
+      this.setState({
+        isOpened: true
+      })
+    }
   }
 
   componentDidHide() { }
@@ -244,13 +254,13 @@ class Course extends Component {
         if (res.confirm) {
           // TODO 确定预约接口
           Taro.showLoading({
-            mask:true,
+            mask: true,
             title: '预约中...'
           })
           setTimeout(() => {
             Taro.showToast({
               title: '预约成功',
-              mask:true,
+              mask: true,
               icon: 'success',
               duration: 2000
             })
@@ -262,10 +272,37 @@ class Course extends Component {
         }
       })
   }
+
+  // 授权
+  getUserInfo = (userInfo) => {
+    console.log('userinfo', userInfo)
+
+    if (userInfo.detail.errMsg != "getUserInfo:fail auth deny") {
+      Taro.setStorageSync('user', userInfo.detail)
+      this.setState({
+        isOpened: false
+      })
+    }
+    // if (userInfo.detail) {   //同意
+    //   this.props.setBasicInfo(userInfo.detail.userInfo) //将用户信息存入redux
+    //   Taro.setStorage({ key: 'userInfo', data: userInfo.detail.userInfo }).then(rst => {  //将用户信息存入缓存中
+    //     Taro.navigateBack()
+    //   })
+    // } else { //拒绝,保持当前页面，直到同意
+    // }
+  }
+  onClose() {
+    console.log(66666)
+    this.setState({
+      isOpened: false
+    }, () => {
+      console.log(this.state)
+    })
+  }
   render() {
-    let { daysList, selectIndex, windowHeight } = this.state;
+    let { daysList, selectIndex, windowHeight, isOpened } = this.state;
     return (
-      <View className='index'>
+      <View className='course-box'>
         <AtNoticebar className="notice" marquee={false} icon='volume-plus' close={false}>上课时间前1个小时，停止约课。</AtNoticebar>
         <View className="course-time">
           <View className='at-row course-time_box'>
@@ -320,6 +357,17 @@ class Course extends Component {
             }
           </Swiper>
         </View>
+        <AtModal closeOnClickOverlay={false} isOpened={isOpened}>
+          <AtModalHeader>授权微信登录</AtModalHeader>
+          <AtModalContent>
+            <View className="model-box">
+              <Image className="model-box_img" src={require('../../assets/img/tab/icon-wx_xcx.png')}></Image>
+            </View>
+          </AtModalContent>
+          <AtModalAction>
+            <Button open-type="getUserInfo" onGetUserInfo={this.getUserInfo}>授权登录</Button>
+          </AtModalAction>
+        </AtModal>
       </View>
     )
   }

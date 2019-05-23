@@ -29,10 +29,11 @@ class App extends Component {
       'pages/setting/index',
     ],
     window: {
-      backgroundTextStyle: 'light',
+      backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
+      enablePullDownRefresh: true
     },
     tabBar: {
       list: [{
@@ -59,13 +60,22 @@ class App extends Component {
   }
 
   componentDidMount () {
+    // Taro.checkSession({
+    //   success:function(params) {
+    //     console.log('session_key 未过期');
+    //   },
+    //   fail:function(params) {
+    //     console.log('已失效，重新登录');
+    //     Taro.clearStorageSync()
+    //   }
+    // })
     Taro.getSystemInfo({
       success: res => {
         console.log(res);
         Taro.setStorageSync('phone',res)
       }
     }).then(res =>{
-
+      Taro.clearStorageSync()
     })
   }
 

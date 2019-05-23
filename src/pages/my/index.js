@@ -1,9 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux';
-import { AtList, AtListItem,AtAvatar } from "taro-ui";
+import { AtList, AtListItem, AtAvatar } from "taro-ui";
 
 import './index.less'
+import { stringify } from 'postcss';
 
 class My extends Component {
 
@@ -32,7 +33,7 @@ class My extends Component {
           url: '/pages/setting/index'
         })
         break;
-        case 'admin':
+      case 'admin':
         Taro.navigateTo({
           url: '/pages/admin/index'
         })
@@ -44,6 +45,16 @@ class My extends Component {
         break;
     }
   }
+  callPhone(phone,e) {
+    Taro.makePhoneCall({
+      phoneNumber:phone
+    }).then((res) => {
+
+    })
+  }
+  bindPhone(e){
+
+  }
   render() {
     return (
       <View className="my-box">
@@ -54,12 +65,13 @@ class My extends Component {
             <View className="name">钢铁侠</View>
             <View className="tel">18937112672</View>
           </View>
-          <Button className="btn-bd">绑定手机</Button>
+          <Button className="btn-bd" open-type="getPhoneNumber" onClick={this.bindPhone.bind(this)}>绑定手机</Button>
         </View>
         <AtList>
           <AtListItem title='个人设置' onClick={this.navigation.bind(this, 'setting')} arrow='right' />
           <AtListItem title='我的预约' onClick={this.navigation.bind(this, 'course')} arrow='right' />
           <AtListItem title='后台管理' onClick={this.navigation.bind(this, 'admin')} arrow='right' />
+          <AtListItem title='联系我们' onClick={this.callPhone.bind(this, '18339933123')} data-phone={'18339933123'} arrow='right' />
         </AtList>
       </View>
     )

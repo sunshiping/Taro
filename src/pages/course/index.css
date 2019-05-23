@@ -1,3 +1,14 @@
+.course-box .model-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.course-box .model-box .model-box_img {
+  width: 268px;
+  height: 84px;
+  margin: 0 auto;
+}
 .course-time {
   padding: 30px;
 }
