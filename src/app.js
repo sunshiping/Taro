@@ -75,7 +75,7 @@ class App extends Component {
         Taro.setStorageSync('phone',res)
       }
     }).then(res =>{
-      Taro.clearStorageSync()
+
     })
   }
 

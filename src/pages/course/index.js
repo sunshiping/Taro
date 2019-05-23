@@ -207,12 +207,11 @@ class Course extends Component {
     const phone = Taro.getStorageSync('phone');
 
     const query = Taro.createSelectorQuery()
-      .selectAll('.index >>> .notice, .index > .course-time')
+      .selectAll('.course-box >>> .notice, .course-box > .course-time')
       .boundingClientRect();
     query.exec(res => {
       let heightAll = 0;
       res[0].map((item, index) => {
-        console.log(item.height);
         heightAll += item.height
       })
       let windowHeight = phone.windowHeight - heightAll - 20
