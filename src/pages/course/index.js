@@ -357,7 +357,7 @@ class Course extends Component {
           </Swiper>
         </View>
         <AtModal closeOnClickOverlay={false} isOpened={isOpened}>
-          <AtModalHeader>授权微信登录</AtModalHeader>
+          <AtModalHeader>微信授权登录</AtModalHeader>
           <AtModalContent>
             <View className="model-box">
               <Image className="model-box_img" src={require('../../assets/img/tab/icon-wx_xcx.png')}></Image>

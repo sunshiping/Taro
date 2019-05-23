@@ -9,6 +9,10 @@
   height: 84px;
   margin: 0 auto;
 }
+.course-box .share-btn {
+  font-size: 32px;
+  font-weight: bold;
+}
 .course-time {
   padding: 30px;
 }
