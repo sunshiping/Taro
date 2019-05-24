@@ -46,7 +46,7 @@ class App extends Component {
         text: "约课",
         iconPath: "./assets/img/tab/icon-Message.png",
         selectedIconPath: "./assets/img/tab/icon-Message_HL.png"
-      },{
+      }, {
         pagePath: "pages/my/index",
         text: "我的",
         iconPath: "./assets/img/tab/icon-Mine.png",
@@ -59,35 +59,40 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
 
   }
 
-  componentDidShow () {
+  componentDidShow() {
+    Taro.login({
+      success: res => {
+        Taro.setStorageSync('Code', res.code)
+      }
+    })
     Taro.getSystemInfo({
       success: res => {
-        Taro.setStorageSync('phone',res)
+        Taro.setStorageSync('phone', res)
       }
-    }).then(res =>{
+    }).then(res => {
       const user = Taro.getStorageSync('user')
-      if(user == ''){
+      if (user == '') {
         console.log('跳转首页');
         Taro.switchTab({
-          url:'/pages/index/index'
-        }).then(()=>{
+          url: '/pages/index/index'
+        }).then(() => {
 
         })
       }
     })
   }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentDidCatchError () {}
+  componentDidCatchError() { }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <Index />

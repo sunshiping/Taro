@@ -14,3 +14,15 @@ export  function  Login(params){
      return false;
   }
 }
+export  function  Mobile(params){
+  return  async dispatch=>{
+     let result= await  postJSON(api.mobile,params);
+     if(result&&result.data&&result.statusCode == 200){
+         dispatch({type:"loginSuccess2",user:result.data})
+         return result.data;
+     }else{
+        dispatch({type:"loginFail",user:''})
+     }
+     return false;
+  }
+}

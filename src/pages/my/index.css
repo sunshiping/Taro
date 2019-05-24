@@ -41,3 +41,7 @@ page {
   border: 1px solid #11bd2e;
   color: #11bd2e;
 }
+.my-box .personal .disabled {
+  border: 1px solid #bdbebd;
+  color: #bdbebd;
+}

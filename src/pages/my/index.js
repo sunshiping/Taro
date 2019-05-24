@@ -4,7 +4,19 @@ import { connect } from '@tarojs/redux';
 import { AtList, AtListItem } from "taro-ui";
 import avatar from "../../assets/img/head.png";
 import './index.less';
-import { stringify } from 'postcss';
+import { Mobile } from '../../actions/login';
+
+
+@connect(function (store) {
+  return { user: store.login }
+}, function (dispatch) {
+  return {
+    Mobile(params) {
+      return dispatch(Mobile(params))
+    }
+  }
+})
+
 
 class My extends Component {
 
@@ -12,18 +24,18 @@ class My extends Component {
     navigationBarTitleText: '个人中心'
   }
   state = {
-    user: {}
+    code: ''
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+    //console.log(this.props, nextProps)
   }
 
   componentWillUnmount() { }
   componentDidMount() {
-    const user = Taro.getStorageSync('user');
+    const code = Taro.getStorageSync('Code');
     this.setState({
-      user: user
+      code: code
     })
     // getTopicList().then(data => {
     //   console.log('取到的数据', data)
@@ -33,7 +45,6 @@ class My extends Component {
 
   componentDidHide() { }
   navigation(type) {
-    console.log(type);
     switch (type) {
       case 'setting':
         Taro.navigateTo({
@@ -61,24 +72,88 @@ class My extends Component {
   }
   // formId
   onSubmit(e) {
-    console.log('formId', e);
+    //console.log('formId', e.detail.formId);
   }
   bindPhone(e) {
-    console.log('获取手机号', e);
+    //console.log('获取手机号', e.detail, this.props.user);
+    debugger
+    if (this.props.user) {
+      Taro.showToast({
+        title: '请先授权登录',
+        icon: 'none',
+        duration: 2000
+      }).then(res => {
+        setTimeout(() => {
+          Taro.switchTab({
+            url: '/pages/course/index'
+          })
+        }, 2100);
+      })
+    } else {
+      const self = this;
+      if (e.detail.errMsg !== "getPhoneNumber:ok") {
+        return;
+      }
+      Taro.checkSession({
+        success(res) {// session_key 未过期，并且在本生命周期一直有效
+          //console.log('session_key 未过期', res);
+          if (self.props.Mobile) {
+            let params = {
+              'code': self.state.code,
+              'iv': e.detail.iv,
+              'encryptedData': e.detail.encryptedData
+            };
+
+            self.props.Mobile(params).then(result => {
+              if (result) {
+                Taro.showToast({
+                  title: '绑定成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+                self.setState({
+                  user: result
+                })
+              } else {
+                Taro.showToast({
+                  title: '绑定失败',
+                  icon: 'none',
+                  duration: 2000
+                });
+              }
+            })
+
+          }
+        },
+        fail() {
+          // session_key 已经失效，需要重新执行登录流程
+          //wx.login() // 重新登录
+          Taro.login({
+            success: res => {
+              Taro.setStorageSync('Code', res.code)
+            }
+          })
+        }
+      }).then(res => {
+
+      })
+    }
   }
   render() {
-    let {user} = this.state;
+    let { user } = this.props;
     return (
       <View className="my-box">
         <View className="personal">
-          <Image className="avatar-icon" src={user?user.customer.avatarUrl:avatar}></Image>
+          <Image className="avatar-icon" src={user && user.customer ? user.customer.avatarUrl : avatar}></Image>
           <View className="personal-con">
-            <View className="name">{user?user.customer.nickName:'未登录'}</View>
-            <View className="tel">{user?'18937112672':''}</View>
+            <View className="name">{user && user.customer ? user.customer.nickName : '未登录'}</View>
+            <View className="tel">{user && user.customer.mobile ? user.customer.mobile : ''}</View>
           </View>
-          <Form report-submit='true' onSubmit={this.onSubmit.bind(this)}>
-            <Button className="btn-bd" formType="submit" open-type="getPhoneNumber" onClick={this.bindPhone.bind(this)}>绑定手机</Button>
-          </Form>
+          {
+            user && !user.customer.mobile ? <Form report-submit='true' onSubmit={this.onSubmit.bind(this)}>
+              <Button className="btn-bd" formType="submit" openType='getPhoneNumber' onGetPhoneNumber={this.bindPhone.bind(this)}>绑定手机</Button>
+            </Form> : <Button disabled={true} className="btn-bd disabled">已绑定</Button>
+          }
         </View>
         <AtList>
           <AtListItem title='个人设置' onClick={this.navigation.bind(this, 'setting')} arrow='right' />

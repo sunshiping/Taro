@@ -7,7 +7,7 @@ import { Login } from '../../actions/login';
 
 
 @connect(function (store) {
-  return { user: store.user }
+  return { user: store.login }
 }, function (dispatch) {
   return {
     Login(params) {
@@ -232,6 +232,7 @@ class Course extends Component {
     });
   }
   componentDidShow() {
+    console.log('redux',this.props.user);
     const user = Taro.getStorageSync('user');
     if (!user) {
       this.setState({
