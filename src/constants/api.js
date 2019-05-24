@@ -1,8 +1,5 @@
-const rootpath = 'https://cnodejs.org/api/v1';
-const apiObject = {
-  topics:rootpath+'/topics',
-  topic:rootpath+'/topic/',
-  accesstoken:rootpath+'/accesstoken',
-  getUserInfo:rootpath+'/user/',
+const rootPath='https://test-tools.1fangxin.cn/api/customer-auth';
+const apiObject={
+  login:rootPath+'/login',//登录
 }
-export default apiObject;
+export default apiObject ;

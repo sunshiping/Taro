@@ -60,26 +60,26 @@ class App extends Component {
   }
 
   componentDidMount () {
-    // Taro.checkSession({
-    //   success:function(params) {
-    //     console.log('session_key 未过期');
-    //   },
-    //   fail:function(params) {
-    //     console.log('已失效，重新登录');
-    //     Taro.clearStorageSync()
-    //   }
-    // })
+
+  }
+
+  componentDidShow () {
     Taro.getSystemInfo({
       success: res => {
-        console.log(res);
         Taro.setStorageSync('phone',res)
       }
     }).then(res =>{
+      const user = Taro.getStorageSync('user')
+      if(user == ''){
+        console.log('跳转首页');
+        Taro.switchTab({
+          url:'/pages/index/index'
+        }).then(()=>{
 
+        })
+      }
     })
   }
-
-  componentDidShow () {}
 
   componentDidHide () {}
 

@@ -1,10 +1,20 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Swiper, Image, SwiperItem, Button, Text } from '@tarojs/components'
-import { AtTabs, AtTabsPane, AtNoticebar, AtIcon, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
+import { AtTabs, AtTabsPane, AtNoticebar, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
 import { connect } from '@tarojs/redux'
-// import { getTopicList } from '../../utils/request'
-
 import './index.less'
+import { Login } from '../../actions/login';
+
+
+@connect(function (store) {
+  return { user: store.user }
+}, function (dispatch) {
+  return {
+    Login(params) {
+      return dispatch(Login(params))
+    }
+  }
+})
 
 class Course extends Component {
 
@@ -275,20 +285,43 @@ class Course extends Component {
   // 授权
   getUserInfo = (userInfo) => {
     console.log('userinfo', userInfo)
-
+    const self = this;
     if (userInfo.detail.errMsg != "getUserInfo:fail auth deny") {
-      Taro.setStorageSync('user', userInfo.detail)
-      this.setState({
-        isOpened: false
+      Taro.login({
+        success(res) {
+          if (self.props.Login) {
+            let params = {
+              'scene': undefined,
+              'userInfo': userInfo.detail.userInfo,
+              'code': res.code
+            };
+            self.props.Login(params).then(result => {
+              if (result) {
+                self.setState({
+                  isOpened: false
+                });
+              }else{
+                Taro.showToast({
+                  title: '授权失败',
+                  icon: 'none',
+                  duration: 2000
+                });
+              }
+            })
+          }
+        },
+        fail(error) {
+          Taro.showToast({
+            title: '登录失败',
+            icon: 'none',
+            duration: 2000
+          })
+            .then(res => console.log(res));
+        }
+      }).then(() => {
+
       })
     }
-    // if (userInfo.detail) {   //同意
-    //   this.props.setBasicInfo(userInfo.detail.userInfo) //将用户信息存入redux
-    //   Taro.setStorage({ key: 'userInfo', data: userInfo.detail.userInfo }).then(rst => {  //将用户信息存入缓存中
-    //     Taro.navigateBack()
-    //   })
-    // } else { //拒绝,保持当前页面，直到同意
-    // }
   }
   onClose() {
     console.log(66666)
@@ -364,7 +397,7 @@ class Course extends Component {
             </View>
           </AtModalContent>
           <AtModalAction>
-            <Button open-type="getUserInfo" onGetUserInfo={this.getUserInfo}>授权登录</Button>
+            <Button className="share-btn" open-type="getUserInfo" onGetUserInfo={this.getUserInfo}>授权登录</Button>
           </AtModalAction>
         </AtModal>
       </View>

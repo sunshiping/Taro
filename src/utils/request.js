@@ -1,14 +1,23 @@
 import Taro from '@tarojs/taro';
-// import api from '../constants/api';
-export function getJson(url, data) {
-  return Taro.request({ url: url, data: data, method: 'GET' });
+import '@tarojs/async-await'
+export function getJSON(url, data) {
+  Taro.showLoading();
+  return Taro.request({ url: url, data: data, method: 'GET' }).then(result => {
+    Taro.hideLoading();
+    return result;
+  });
 }
-export function postJson(url, data) {
-  return Taro.request({ url: url, data: data, method: 'POST' });
+export function postJSON(url, data) {
+  Taro.showLoading();
+  return Taro.request({
+    header: {
+      'content-type': 'application/json'
+    },
+    url: url,
+    data: data,
+    method: 'POST'
+  }).then(result => {
+    Taro.hideLoading();
+    return result;
+  });
 }
-// export async function getTopicList(url, data) {
-//   let result = await getJson(api.topics).catch(message => {
-//     console.log('出错了:' + message)
-//   })
-//   return result;
-// }
