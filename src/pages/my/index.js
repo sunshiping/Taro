@@ -76,7 +76,6 @@ class My extends Component {
   }
   bindPhone(e) {
     //console.log('获取手机号', e.detail, this.props.user);
-    debugger
     if (this.props.user) {
       Taro.showToast({
         title: '请先授权登录',
