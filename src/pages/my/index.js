@@ -2,8 +2,8 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text, Image, Form } from '@tarojs/components'
 import { connect } from '@tarojs/redux';
 import { AtList, AtListItem } from "taro-ui";
-
-import './index.less'
+import avatar from "../../assets/img/head.png";
+import './index.less';
 import { stringify } from 'postcss';
 
 class My extends Component {
@@ -71,11 +71,10 @@ class My extends Component {
     return (
       <View className="my-box">
         <View className="personal">
-          {/* <AtAvatar circle size="large" image='https://jdc.jd.com/img/200'></AtAvatar> */}
-          <Image className="avatar-icon" src={user.customer.avatarUrl}></Image>
+          <Image className="avatar-icon" src={user?user.customer.avatarUrl:avatar}></Image>
           <View className="personal-con">
-            <View className="name">{user.customer.nickName}</View>
-            <View className="tel">18937112672</View>
+            <View className="name">{user?user.customer.nickName:'未登录'}</View>
+            <View className="tel">{user?'18937112672':''}</View>
           </View>
           <Form report-submit='true' onSubmit={this.onSubmit.bind(this)}>
             <Button className="btn-bd" formType="submit" open-type="getPhoneNumber" onClick={this.bindPhone.bind(this)}>绑定手机</Button>

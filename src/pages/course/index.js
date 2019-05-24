@@ -297,8 +297,16 @@ class Course extends Component {
             };
             self.props.Login(params).then(result => {
               if (result) {
-                self.setState({
-                  isOpened: false
+                Taro.showToast({
+                  title: '授权成功',
+                  icon: 'success',
+                  duration: 2000
+                }).then(()=>{
+                  setTimeout(()=>{
+                    self.setState({
+                      isOpened: false
+                    });
+                  }, 2100)
                 });
               }else{
                 Taro.showToast({
